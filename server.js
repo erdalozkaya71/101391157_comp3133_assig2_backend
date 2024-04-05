@@ -6,6 +6,8 @@ const typeDefs = require("./typeDefs");
 const userResolver = require("./resolver/userResolver");
 const employeeResolver = require("./resolver/employeeResolver");
 
+const SERVER_PORT = process.env.SERVER_PORT || 3000;
+
 dotenv.config({ path: "./config.env" });
 
 const app = express(); // Create an Express application
@@ -31,7 +33,7 @@ async function startServer() {
       console.log("Success MongoDB connection");
       app.listen(3000, () =>
         console.log(
-          `Server ready at http://localhost:3000${apolloServer.graphqlPath}`
+          `Server ready at http://localhost:${SERVER_PORT}${apolloServer.graphqlPath}`
         )
       );
     })
