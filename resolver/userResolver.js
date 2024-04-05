@@ -15,8 +15,8 @@ const resolvers = {
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
-      console.log("Password: ", password);
-      console.log("user.password: ", user.password);
+      //console.log("Password: ", password);
+      //console.log("user.password: ", user.password);
       const valid = await bcrypt.compare(password, user.password);
       if (!valid) {
         throw new Error("Invalid password");
@@ -36,14 +36,14 @@ const resolvers = {
   Mutation: {
     // User signup resolver
     signup: async (_, { username, email, password }) => {
-      console.log("Signup started for:", username, email); // Logging input
+      //console.log("Signup started for:", username, email); // Logging input
 
       const existingUser = await User.findOne({
         $or: [{ username }, { email }],
       });
 
       if (existingUser) {
-        console.log("Username or email already in use"); // Logging existing user error
+        //console.log("Username or email already in use"); // Logging existing user error
         throw new Error("Username or email already in use");
       }
 
@@ -55,14 +55,14 @@ const resolvers = {
       });
 
       await user.save();
-      console.log("User saved:", user); // Logging the saved user
+      //console.log("User saved:", user); // Logging the saved user
 
       //A function to generate JWT tokens
       const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
         expiresIn: "1d",
       });
 
-      console.log("Token generated:", token); // Logging the token
+      //console.log("Token generated:", token); // Logging the token
 
       return {
         token,
