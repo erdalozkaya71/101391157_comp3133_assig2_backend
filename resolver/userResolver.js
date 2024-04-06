@@ -17,13 +17,10 @@ const resolvers = {
       if (!valid) {
         throw new Error("Invalid password");
       }
-
-      // Return user data without a token
       return { user };
     },
   },
   Mutation: {
-    // User signup resolver
     signup: async (_, { username, email, password }) => {
       const existingUser = await User.findOne({
         $or: [{ username }, { email }],
@@ -42,7 +39,6 @@ const resolvers = {
 
       await user.save();
 
-      // Return user data without a token
       return { user };
     },
   },
