@@ -10,7 +10,7 @@
     {
       "src": "/graphql",
       "dest": "/index.js",
-      "methods": ["GET", "POST"]
+      "methods": ["POST"]
     },
     {
       "src": "/(.*)",
