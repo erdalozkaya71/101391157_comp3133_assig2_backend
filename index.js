@@ -19,7 +19,7 @@ async function startServer() {
   });
 
   await apolloServer.start();
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, path: "/graphql" });
 
   const DB_HOST = "cluster0.phnktq8.mongodb.net";
   const DB_USER = "erdalozkaya";
@@ -31,7 +31,7 @@ async function startServer() {
     .connect(DB_CONNECTION_STRING, {})
     .then(() => {
       console.log("Success MongoDB connection");
-      app.listen(3000, () =>
+      app.listen(process.env.PORT || 3000, () =>
         console.log(
           `Server ready at http://localhost:${SERVER_PORT}${apolloServer.graphqlPath}`
         )
